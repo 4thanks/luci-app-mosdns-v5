@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
   push:
     tags:
-      - v5.**
+      - '*'
 
 jobs:
   build:
@@ -46,16 +46,18 @@ jobs:
           NO_REFRESH_CHECK: true
 
       - name: Upload artifacts
+        if: startsWith(github.ref, 'refs/tags/')
         uses: actions/upload-artifact@v4
         with:
-          tag: ${{ github.ref }}
+          tag: ${{ github.ref_name }}
           name: ${{ matrix.arch }}
           path: bin/packages/${{ matrix.arch }}/packages_ci/*.ipk
 
       - name: Upload packages
+        if: startsWith(github.ref, 'refs/tags/')
         uses: ncipollo/release-action@v1
         with:
-          tag: ${{ github.ref }}
+          tag: ${{ github.ref_name }}
           token: ${{ secrets.GITHUB_TOKEN }}
           allowUpdates: true
           replacesArtifacts: true
