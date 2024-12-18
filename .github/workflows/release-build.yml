@@ -1,6 +1,8 @@
 name: Build
 
 on:
+  #手动编译
+  workflow_dispatch:
   push:
     tags:
       - v5.**
@@ -8,7 +10,7 @@ on:
 jobs:
   build:
     name: Build ${{ matrix.arch }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
