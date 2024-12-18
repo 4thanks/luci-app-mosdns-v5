@@ -16,20 +16,15 @@ jobs:
       matrix:
         arch:
           - aarch64_cortex-a53
-          - aarch64_cortex-a72
-          - aarch64_generic
           - arm_cortex-a7_neon-vfpv4
-          - arm_cortex-a8_vfpv3
-          - mips64_octeonplus
           - mips_24kc
-          - mips_mips32
           - mipsel_24kc
           - mipsel_24kc_24kf
           - mipsel_mips32
           - x86_64
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@main
         with:
           fetch-depth: 0
 
